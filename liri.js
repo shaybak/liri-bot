@@ -16,7 +16,6 @@ var search = process.argv[2];
 // Joining the remaining arguments since an actor or tv show name may contain spaces
 var term = process.argv.slice(3).join(" ");
 
-term = "Stinkfist"
 
 // Movie variables
 var movie = "scarface";
@@ -113,13 +112,17 @@ function spotifyThisSong() {
     spotify
         .search({
             type: 'track',
-            query: "Stinkfist"
+            query: term
         })
         .then(function(response) {
+
+            console.log(". . . . . . . . . .");
             console.log("Artist: " + response.tracks.items[0].artists[0].name);
             console.log("Song: " + response.tracks.items[0].name);
             console.log("Preview Link: " + response.tracks.items[0].external_urls.spotify);
             console.log("Album: " + response.tracks.items[0].album.name);
+            console.log(". . . . . . . . . .");
+
         })
         .catch(function(err) {
             console.log(err);
@@ -133,8 +136,15 @@ function doWhatItSays() {
 
     axios.get(bandsURL)
         .then(function(response) {
-            //log name of venue, venue location, date of event 
+            //log name of venue, venue location, date of event ß
         });
+}
+
+if (search === "spotify-this-song" && term !== "") {
+    spotifyThisSong();
+} else {
+    term = "The Sign";
+    spotifyThisSong(term);
 }
 
 // SWITCH STATEMENT *******************************************************************************************************
@@ -151,4 +161,4 @@ function doWhatItSays() {
 //         // code block
 // }
 
-spotifyThisSong();
+// spotifyThisSong();
