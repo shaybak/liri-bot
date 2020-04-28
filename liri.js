@@ -177,7 +177,7 @@ if (search === "spotify-this-song" && term !== "") {
 } else if (search === "movie-this" && term !== "") {
     movieThis();
 } else if (search === "movie-this" && term === "") {
-    term = "scarface";
+    term = "mr nobody";
     omdbURL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
     movieThis();
 

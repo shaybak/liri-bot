@@ -65,7 +65,30 @@ As you'll see, the application uses this information to create a command and sea
 
 ## DEFAULTS
 
+If the user only enters a command but doesn't specify a search term, the application will default to predefined terms, as follows:
 
+***
 
+### Default song search ("The Sign")
 
+![default-song](gifs/default-song.gif)
+
+***
+
+### Default movie search ("Mr. Nobody")
+
+![default-movie](gifs/default-movie.gif)
+
+***
+
+### Default concert search ("Celine Dion")
+
+![default-concert](gifs/default-concert.gif)
+
+***
+
+### No command given
+If no command at all is given, Liri will ask you to enter a valid command:
+
+![default-nothing](gifs/default-nothing.gif)
 
