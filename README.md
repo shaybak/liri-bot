@@ -54,7 +54,7 @@ In this example, we'll pull a command and search term from a file called random.
 
 As you'll see, the application uses this information to create a command and search term and gives us the information as though we'd typed it all out in the command line:
 
-![fs-example](./gifs/fs-example.gif)
+![fs-example](gifs/fs-example.gif)
 
 
 
