@@ -16,7 +16,7 @@ The application uses Axios to grab data from the APIs.
 
 ## HOW TO USE LIRI BOT
 
-Liri is a simple command-line-based application that takes in a search parameter and search term entered by the user in a "do-this search term" format.
+Liri is a simple command-line-based application that takes in a search parameter and search term entered by the user in a "do-this" / "for search term" format.
 
 ## EXAMPLES
 
