@@ -191,4 +191,7 @@ if (search === "spotify-this-song" && term !== "") {
 
 } else if (search === "do-what-it-says") {
     doWhatItSays();
+
+} else {
+    console.log("LIRI SAYS: Sorry, I don't understand. Please enter a command.")
 }
