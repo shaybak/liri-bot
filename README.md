@@ -26,26 +26,26 @@ All examples will run through the command line with node. Since our application 
 
 We'll then follow this with one of the following command plus a search term as follows in these examples:
 
-#### Search for song information
+### Search for song information
 Command: spotify-this-song (song)
 
 ![spotify-example](gifs/spotify-example.gif)
 
 
-#### Search for movie information
+### Search for movie information
 Command: movie-this (movie)
 
 ![movie-example](gifs/movie-example.gif)
 
 
-#### Search for concert information
+### Search for concert information
 Command: concert-this (band)
 
 ![concert-example](gifs/concert-example.gif)
 
 
 
-#### Read a file to search using the file presets
+### Read a file to search using the file presets
 Command: do-what-it-says (NOTE: this doesn't require a search term, since the application will pull that value directly from the file)
 
 In this example, we'll pull a command and search term from a file called random.txt. Here are the contents of that file:
