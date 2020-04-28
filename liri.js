@@ -1,14 +1,14 @@
 require("dotenv").config();
 
-var moment = require("moment");
 
 var keys = require("./keys.js");
 
 var Spotify = require("node-spotify-api");
-
 var spotify = new Spotify(keys.spotify);
 
 var axios = require("axios");
+var fs = require('fs');
+var moment = require("moment");
 
 // Grab search command line argument
 var search = process.argv[2];
@@ -18,9 +18,8 @@ var term = process.argv.slice(3).join(" ");
 
 
 // Movie variables
-var movie = "scarface";
 
-var omdbURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
+var omdbURL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
 
 // Spotify variables
 
@@ -28,9 +27,8 @@ var omdbURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=tril
 // http://www.omdbapi.com/?t=scarface&y=&plot=short&apikey=trilogy
 
 // Concert variables
-var artist = "tool";
 
-var bandsURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+var bandsURL = "https://rest.bandsintown.com/artists/" + term + "/events?app_id=codingbootcamp";
 
 
 
@@ -43,7 +41,9 @@ function movieThis() {
         .get(omdbURL)
         .then(
             function(response) {
+
                 console.log(". . . . . . . . . .");
+
                 console.log("Movie Title: " + response.data.Title);
                 console.log("Release Year: " + response.data.Year);
                 console.log("IMDB Rating: " + response.data.imdbRating);
@@ -52,7 +52,9 @@ function movieThis() {
                 console.log("Language: " + response.data.Language);
                 console.log("Plot: " + response.data.Plot);
                 console.log("Actors: " + response.data.Actors);
+
                 console.log(". . . . . . . . . .");
+
             })
         .catch(function(error) {
             if (error.response) {
@@ -134,31 +136,59 @@ function spotifyThisSong() {
 
 function doWhatItSays() {
 
-    axios.get(bandsURL)
-        .then(function(response) {
-            //log name of venue, venue location, date of event ß
-        });
+    fs.readFile("random.txt", "utf8", function(error, data) {
+
+        // If the code experiences any errors it will log the error to the console.
+        if (error) {
+            return console.log(error);
+        }
+
+        // Then split it by commas (to make it more readable)
+        var dataArr = data.split(",");
+
+        search = dataArr[0]
+
+        term = dataArr[1]
+
+        console.log(search + " " + term);
+
+        if (search === "spotify-this-song") {
+            spotifyThisSong(term);
+        } else if (search === "movie-this") {
+            omdbURL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
+            movieThis();
+        } else if (search === "concert-this") {
+            bandsURL = "https://rest.bandsintown.com/artists/" + term + "/events?app_id=codingbootcamp";
+            concertThis();
+        } else {
+            console.log("LIRI SAYS: Sorry, I didn't catch that. Please try again.")
+        }
+
+    });
 }
 
 if (search === "spotify-this-song" && term !== "") {
     spotifyThisSong();
-} else {
+} else if (search === "spotify-this-song" && term === "") {
     term = "The Sign";
     spotifyThisSong(term);
+
+
+} else if (search === "movie-this" && term !== "") {
+    movieThis();
+} else if (search === "movie-this" && term === "") {
+    term = "scarface";
+    omdbURL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
+    movieThis();
+
+
+} else if (search === "concert-this" && term !== "") {
+    concertThis();
+} else if (search === "concert-this" && term === "") {
+    term = "celine dion";
+    bandsURL = "https://rest.bandsintown.com/artists/" + term + "/events?app_id=codingbootcamp";
+    concertThis();
+
+} else if (search === "do-what-it-says") {
+    doWhatItSays();
 }
-
-// SWITCH STATEMENT *******************************************************************************************************
-
-// switch (search) {
-//     case "spotify-this-song":
-//         song = term;
-//         spotifyThisSong;
-//         break;
-//     case "movie-this":
-//         // code block
-//         break;
-//     default:
-//         // code block
-// }
-
-// spotifyThisSong();
